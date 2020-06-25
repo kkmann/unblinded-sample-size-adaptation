@@ -4,4 +4,4 @@ set -ex
 wget -O julia.tar.gz https://julialang-s3.julialang.org/bin/linux/x64/1.4/julia-1.4.2-linux-x86_64.tar.gz
 tar -xvzf julia.tar.gz
 
-julia-1.4.2/bin/julia -e 'import Pkg; Pkg.activate("."); Pkg.instantiate()'
+julia-1.4.2/bin/julia -e 'import Pkg; Pkg.activate("."); Pkg.instantiate(); Pkg.precompile()'
