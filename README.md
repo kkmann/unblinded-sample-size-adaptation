@@ -1,4 +1,4 @@
-# [WIP] Debunking some mysts about usample size adaptations ;)
+# [WIP] Debunking some myths about sample size adaptations ;)
 
 very early stage, take everything with k >= 2 grains of salt!
 
