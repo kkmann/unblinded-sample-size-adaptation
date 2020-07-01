@@ -8,4 +8,7 @@
 *.html
 
 *.ipynb_checkpoints
- 
+
+.ipython
+.jupyter
+.local
