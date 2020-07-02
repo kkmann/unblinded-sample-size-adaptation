@@ -1,3 +1,5 @@
+![build and push docker container](https://github.com/kkmann/unplanned-sample-size-adaptation/workflows/build%20and%20push%20docker%20container/badge.svg?branch=master)
+
 # [WIP] Debunking some myths about sample size adaptations ;)
 
 very early stage, take everything with k >= 2 grains of salt!
