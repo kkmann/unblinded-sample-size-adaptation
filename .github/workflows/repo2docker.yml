@@ -18,3 +18,14 @@ jobs:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       uses: machine-learning-apps/repo2docker-action@0.2
+  execute notebook:
+    steps: 
+    - name: start container
+      run: |
+        docker run -d --name repo-container kkmann/unplanned-sample-size-adaptation
+    - name: execute jupyter notebook
+      run: |
+        docker exec -it repo-container \
+          jupyter nbconvert --to notebook \
+          --ExecutePreprocessor.kernel_name=julia-1.4 --ExecutePreprocessor.timeout=600 \
+          --execute notebooks/conditional-power-and-friends.ipynb 
