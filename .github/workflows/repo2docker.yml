@@ -14,6 +14,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: repo2docker Action
       env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  
+        INPUT_DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        INPUT_DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  
       uses: machine-learning-apps/repo2docker-action@0.2
