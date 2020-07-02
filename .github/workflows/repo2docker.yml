@@ -17,10 +17,8 @@ jobs:
       with: 
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      uses: machine-learning-apps/repo2docker-action@0.2
-      MYBINDERORG_TAG: ${{ github.event.ref }}
-  execute notebook:
-    steps: 
+        MYBINDERORG_TAG: ${{ github.event.ref }}      
+      uses: machine-learning-apps/repo2docker-action@0.2 
     - name: start container
       run: |
         docker run -d --name repo-container kkmann/unplanned-sample-size-adaptation
