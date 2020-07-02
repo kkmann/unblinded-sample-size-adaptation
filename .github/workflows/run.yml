@@ -2,11 +2,11 @@ name: run
 
 on: 
   pull_request:
-    branches: [ master ]
-    paths-ignore: [ .binder ]
+    branches: 'master'
+    paths-ignore: '.binder/**' 
   push:
-    branches: [ master ]
-    paths-ignore: [ .binder ]
+    branches: 'master'
+    paths-ignore: '.binder/**'
 
 jobs:
   build:
