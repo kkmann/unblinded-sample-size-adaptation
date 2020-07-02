@@ -6,14 +6,16 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  INPUT_DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  INPUT_DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
 jobs:
   repo2docker:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: repo2docker Action
-      env:
-        INPUT_DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        INPUT_DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  
+    - name: repo2docker Action  
+      run: echo $INPUT_DOCKER_USERNAME
       uses: machine-learning-apps/repo2docker-action@0.2
