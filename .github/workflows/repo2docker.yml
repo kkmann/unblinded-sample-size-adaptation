@@ -5,12 +5,12 @@ on:
     branches: 
     - 'master'
     paths: 
-    - '.binder'
+    - '.binder/**'
   pull_request:
     branches: 
     - 'master'
     paths: 
-    - '.binder'
+    - '.binder/**'
     
 jobs:
   repo2docker:
