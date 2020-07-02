@@ -1,19 +1,21 @@
 name: run
 
-on: [push]
+on: 
+  push:
+    branches: [ master ]
+    paths-ignore: [ .binder ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: start container
       run: |
         docker run -d --name repo-container kkmann/unplanned-sample-size-adaptation
     - name: execute jupyter notebook
-      run: docker exec -it repo-container \
+      run: |
+        docker exec -it repo-container \
           jupyter nbconvert --to notebook \
           --ExecutePreprocessor.kernel_name=julia-1.4 --ExecutePreprocessor.timeout=600 \
           --execute notebooks/conditional-power-and-friends.ipynb 
