@@ -16,5 +16,4 @@ jobs:
       with: 
         INPUT_DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         INPUT_DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      run: echo $INPUT_DOCKER_USERNAME
       uses: machine-learning-apps/repo2docker-action@0.2
