@@ -21,10 +21,10 @@ jobs:
       uses: machine-learning-apps/repo2docker-action@0.2 
     - name: start container
       run: |
-        docker run -d --name repo-container kkmann/unplanned-sample-size-adaptation
+        docker run -d --name repo-container ${{ secrets.DOCKER_USERNAME }}/unplanned-sample-size-adaptation
     - name: execute jupyter notebook
       run: |
-        docker exec -it repo-container \
+        docker exec repo-container \
           jupyter nbconvert --to notebook \
           --ExecutePreprocessor.kernel_name=julia-1.4 --ExecutePreprocessor.timeout=600 \
           --execute notebooks/conditional-power-and-friends.ipynb 
