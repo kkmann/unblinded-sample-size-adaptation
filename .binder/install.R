@@ -1,6 +1,8 @@
 install.packages("devtools")
 install.packages("tidyverse")
 install.packages("patchwork")
+install.packages("truncnorm")
 install.packages("adoptr")
 install.packages("nloptr")
 install.packages("future")
+install.packages("renv")

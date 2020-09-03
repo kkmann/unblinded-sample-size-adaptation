@@ -1,6 +1,8 @@
 Depends:
-    tidyverse
-    patchwork
-    nloptr
-    adoptr
-    future
+    tidyverse,
+    patchwork,
+    nloptr,
+    adoptr,
+    future,
+    truncnorm,
+    renv
