@@ -1,0 +1,6 @@
+Depends:
+    tidyverse
+    patchwork
+    nloptr
+    adoptr
+    future
