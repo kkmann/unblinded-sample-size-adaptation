@@ -20,6 +20,7 @@ jobs:
         restore-keys: r-
     - name: install packages
       run: |
+        sudo apt-get install libcurl4-openssl-dev
         R -e 'install.packages("renv")'
         R -e 'renv::restore()'
     - run: ./run
