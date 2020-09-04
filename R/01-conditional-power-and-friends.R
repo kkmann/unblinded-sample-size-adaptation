@@ -80,7 +80,7 @@ tibble(
         theme(
             legend.position = 'top'
         )
-ggsave("../output/figures/acp_ocp_pp_example.pdf", width = 8, height = 4.5)
+ggsave("../output/figures/acp_ocp_pp_example.pdf", width = 8, height = 3.5)
 
 
 
@@ -117,7 +117,7 @@ expand_grid(
              legend.position = 'top',
             panel.grid.minor = element_blank()
         )
-ggsave("../output/figures/acp_ocp_pp_bias_mae_mse.pdf", width = 8, height = 4)
+ggsave("../output/figures/acp_ocp_pp_bias_mae_mse.pdf", width = 8, height = 3.5)
 
 
 
@@ -142,4 +142,4 @@ expand_grid(
         theme(
             panel.grid.minor = element_blank()
         )
-ggsave("../output/figures/acp_ocp_pp_sampling_distributions.pdf", width = 8, height = 5)
+ggsave("../output/figures/acp_ocp_pp_sampling_distributions.pdf", width = 8, height = 3.5)
