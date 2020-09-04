@@ -1,5 +1,9 @@
 name: run
 
+on:
+  push:
+  pull_request:
+
 jobs:
   run-all:
     runs-on: ubuntu-latest
