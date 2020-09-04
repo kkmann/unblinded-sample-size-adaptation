@@ -37,7 +37,7 @@ TruncatedNormal <- function(mu, tau, a, b ) {
     res
 }
 
-condition <- function(dist, a = -Inf, b = Inf, ...) UseMethod("condition", dist) 
+condition <- function(dist, a = -Inf, b = Inf, ...) UseMethod("condition", dist)
 
 condition.TruncatedNormal <- function(dist, a = -Inf, b = Inf, ...) {
     res <- list(mu = dist$mu, tau = dist$tau, a = max(a, dist$a), b = min(b, dist$b))
@@ -57,7 +57,7 @@ probability_density.TruncatedNormal <- function(Theta, theta, ...) {
 posterior <- function(prior, n, z, ...) UseMethod("posterior", prior)
 
 posterior.TruncatedNormal <- function(prior, n, z) {
-     mu_post <- 1 / (1/prior$tau^2 + n) * (prior$mu / prior$tau^2 + sqrt(n) * z)  
+     mu_post <- 1 / (1/prior$tau^2 + n) * (prior$mu / prior$tau^2 + sqrt(n) * z)
     tau_post <- 1 / (1/prior$tau^2 + n)
     res <- list(mu = mu_post, tau = tau_post, a = prior$a, b = prior$b)
     attr(res, "class") <- c("TruncatedNormal", class(res))
@@ -71,7 +71,7 @@ joint_density <- function(Theta, theta, n, z)  {
     dnorm(z, mean = sqrt(n)*theta, sd = 1) * probability_density(Theta, theta)
 }
 
-predictive_pdf <- function(Theta, n, z) { 
+predictive_pdf <- function(Theta, n, z) {
       a <- (Theta$b - Theta$a) / 2
       b <- a + Theta$a
     # scale pivots for theta to (common) support
@@ -81,7 +81,7 @@ predictive_pdf <- function(Theta, n, z) {
             tidyr::expand_grid(theta = pivots, tibble::tibble(n = n, z = z)),
             ~joint_density(Theta, ..1, ..2, ..3)
         ),
-        ncol = length(n), 
+        ncol = length(n),
         byrow = TRUE
     )
     res <- a*matrix(gl_rule_global$weights, nrow = 1) %*% res
@@ -95,7 +95,7 @@ predictive_pdf <- function(Theta, n, z) {
     pnorm(z, mean = sqrt(n)*theta, sd = 1) * probability_density(Theta, theta)
 }
 
-predictive_cdf <- function(Theta, n, z) { 
+predictive_cdf <- function(Theta, n, z) {
       a <- (Theta$b - Theta$a) / 2
       b <- a + Theta$a
     # scale pivots for theta to (common) support
@@ -105,7 +105,7 @@ predictive_cdf <- function(Theta, n, z) {
             tidyr::expand_grid(theta = pivots, tibble::tibble(n = n, z = z)),
             ~.f(Theta, ..1, ..2, ..3)
         ),
-        ncol = length(n), 
+        ncol = length(n),
         byrow = TRUE
     )
     res <- a*matrix(gl_rule_global$weights, nrow = 1) %*% res
@@ -122,7 +122,7 @@ conditional_power <- function(zm, m, n, c, theta) {
     tau <- m/n
      mu <- sqrt(n)*theta + sqrt(tau)*(zm - sqrt(m)*theta)
      sd <- sqrt(1 - tau)
-    pnorm(c, mu, sd, lower.tail = FALSE) 
+    pnorm(c, mu, sd, lower.tail = FALSE)
 }
 
 observed_conditional_power <- function(zm, m, n, c) conditional_power(zm, m, n, c, zm/sqrt(m))
@@ -136,7 +136,16 @@ predictive_power <- function(zm, m, n, c, prior) {
 expected_power <- function(n, c, prior) {
     Theta <- condition(prior, 0)
     integrate_gl(
-        function(theta) pnorm(c, sqrt(n)*theta, 1, lower.tail = FALSE) * probability_density(Theta, theta), 
+        function(theta) pnorm(c, sqrt(n)*theta, 1, lower.tail = FALSE) * probability_density(Theta, theta),
         Theta$a, Theta$b
     )
+}
+
+# convert stage-two critical value to overall critical value (for adoptr design object)
+critical_value <- function(design, zm) {
+    n =  adoptr::n(design, zm, round = FALSE)
+    n1 = adoptr::n1(design)
+    c2 = adoptr::c2(design, zm)
+    if (!is.finite(c2)) return(c2)
+    sqrt(n - n1) / sqrt(n) * c2 + sqrt(n1/n) * zm
 }

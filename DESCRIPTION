@@ -2,6 +2,7 @@ Depends:
     tidyverse,
     patchwork,
     nloptr,
+    multiroot,
     adoptr,
     future,
     truncnorm,

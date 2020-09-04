@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -ex
+
+scripts=( \
+    "01-conditional-power-and-friends.R" \
+    "02-naive-recalculation-and-optimal-design.R" \
+    "03-consistent-recalculation-conditional-type-II-error-rate-principle.R" \
+    "04-consistent-recalculation-lambda-approach.R" \
+)
+
+# install renv package for R if not already exists
+Rscript -e "if (!('renv' %in% rownames(installed.packages()))) install.packages('renv')"
+
+for script in ${scripts[@]};
+do
+    (cd R; Rscript -e "renv::restore(); source('$script')")
+done
