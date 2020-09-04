@@ -113,12 +113,11 @@ summary(
         `Expected Power` = EP
     ) %>%
     show()
+# determine optimal lambda
+lambda <- tbl_lambda%>% arrange(delta) %>% pull(lambda) %>% head(1)
 cat(sprintf("matched-lambda optimal design, lambda=%.2f:\n\r", lambda))
 tbl_lambda %>%
-    arrange(delta) %>% {
-        lambda <<- pull(., lambda) %>% .[[1]]
-        .
-    } %>%
+    arrange(delta) %>%
     pull(design) %>%
     .[[1]] %>%
     summary(
