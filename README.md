@@ -1,3 +1,5 @@
+![run](https://github.com/kkmann/unplanned-sample-size-adaptation/workflows/run/badge.svg)
+
 # Sample Size Recalculation, When and How?
 
 `R` script files for reproducing the results (roughy ordered by section) are
