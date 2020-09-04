@@ -1,16 +1,16 @@
 name: build and push docker container
 
-on:
-  push:
-    branches: 
-    - 'master'
-    paths: 
-    - '.binder/**'
-  pull_request:
-    branches: 
-    - 'master'
-    paths: 
-    - '.binder/**'
+# on:
+#  push:
+#    branches: 
+#    - 'master'
+#    paths: 
+#    - '.binder/**'
+#  pull_request:
+#    branches: 
+#    - 'master'
+#    paths: 
+#    - '.binder/**'
 
 env:
   INPUT_IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/unplanned-sample-size-adaptation
