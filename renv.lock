@@ -60,10 +60,10 @@
     },
     "adoptr": {
       "Package": "adoptr",
-      "Version": "0.3.2",
+      "Version": "0.3.3.9000",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "d79a60a1554661454b62f7fa7d6b58b5"
+      "Repository": null,
+      "Hash": "e3d12f5f20b061de86a7cbf1a69e4107"
     },
     "askpass": {
       "Package": "askpass",
@@ -428,6 +428,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "2737faeee353704efec5afa1e943dd64"
+    },
+    "numDeriv": {
+      "Package": "numDeriv",
+      "Version": "2016.8-1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "df58958f293b166e4ab885ebcad90e02"
     },
     "openssl": {
       "Package": "openssl",
