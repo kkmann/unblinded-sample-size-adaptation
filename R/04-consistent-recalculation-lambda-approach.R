@@ -132,20 +132,40 @@ tbl_lambda %>%
     m <- 35
 n_max <- 160
 adapt_lambda <- function(priormean, zm) {
+    # store optimal n and c under old design
     n_old <- n(optimal_design, zm, round = FALSE)
     c_old <- critical_value(optimal_design, zm)
+    # if we had early stopping under old design, nothing to do!
     if (!is.finite(c_old))
         return(list(
             n = n_old,
             c = c_old,
             optim = NULL
         ))
-    # original conditional type-I error
-    alpha_bar <- conditional_power(zm, m, n_old, c_old, 0)
+    # original conditional type-I error rate and predictive power
+               alpha_bar <- conditional_power(zm, m, n_old, c_old, 0)
+    predictive_power_bar <- predictive_power(zm, m = m, n = n_old, c = c_old, prior = prior)
+    # conditional power constraint of new design
+    g <- function(x) {n <- x[1]; c <- x[2]; predictive_power(zm, m = m, n = n, c = c, prior = prior) - predictive_power_bar}
+    # conditional error constraint of new design
+    h <- function(x) {n <- x[1]; c <- x[2]; alpha_bar - conditional_power(zm, m = m, n = n, c = c, theta = 0)}
+    # solve linear system to obtain Lagrange multiplier
+    lambda <- solve(
+        matrix(c(
+                numDeriv::grad(g, c(n_old, c_old), method.args = list(r = 8)),
+                numDeriv::grad(h, c(n_old, c_old), method.args = list(r = 8))
+            ),
+            byrow = FALSE,
+            ncol = 2
+        ),
+        c(1, 0) # gradient of the objective
+    )
+    # define new prior with shifted mean
     new_prior <- TruncatedNormal(priormean, 0.2, -0.5, 1.0)
+    # objective uses lagrange multiplier from original problem
     objective <- function(x) {
         n_bar <- x[1]; c_bar <- x[2]
-        n_bar - lambda*predictive_power(zm, m = m, n = n_bar, c = c_bar, prior = new_prior)
+        n_bar - tmp2[1]*predictive_power(zm, m = m, n = n_bar, c = c_bar, prior = new_prior)
     }
     conditional_error_constraint <- function(x) {
         n_bar <- x[1]; c_bar <- x[2]
@@ -160,7 +180,7 @@ adapt_lambda <- function(priormean, zm) {
         opts = list(
             algorithm = "NLOPT_LN_COBYLA",
              xtol_rel = 1e-4,
-              maxeval = 1e5
+              maxeval = 1e6
         )
     )
     if (res$status != 4) stop(res$message)
@@ -174,8 +194,9 @@ adapt_lambda <- function(priormean, zm) {
         optim = res
     )
 }
+
 # observed effects to look at
-thetas <- c(.3, .35, .4)
+thetas <- c(.25, .30, .35)
 tbl_adapted_lambda <- expand_grid(
                 zm = sqrt(m)*thetas,
         `new mean` = seq(-0.5, 1, length.out = 100)
@@ -184,6 +205,13 @@ tbl_adapted_lambda <- expand_grid(
         tmp = map2(`new mean`, zm, ~{tmp <- adapt_lambda(..1, ..2); tibble(n = tmp$n, c = tmp$c)})
     ) %>%
     unnest(tmp) %>%
+    group_by(zm) %>%
+    # manually fix glitch
+    mutate(
+        c = if_else(row_number() < tail(which(c == Inf), 1), Inf, c),
+        n = if_else(row_number() < tail(which(c == Inf), 1), m, n)
+    ) %>%
+    ungroup() %>%
     mutate(
         section = if_else(c == Inf, "early futility", "continue"),
          effect = factor(zm/sqrt(m)),
@@ -226,7 +254,7 @@ plt2 <- ggplot(tbl_adapted_lambda) +
     geom_vline(xintercept = 0.4, color = "grey") +
     geom_line(aes(linetype = effect)) +
     scale_x_continuous('new prior mean', expand = c(0, 0)) +
-    scale_y_continuous('critical value', limits = c(0, 3)) +
+    scale_y_continuous('critical value', limits = c(1, 3)) +
     scale_linetype('observed effect') +
     theme_bw() +
     theme(

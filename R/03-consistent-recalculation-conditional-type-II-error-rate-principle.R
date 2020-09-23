@@ -116,7 +116,7 @@ adapt <- function(priormean, zm, nstart = 15) {
 m     <- n1(optimal_design)
 n_max <-  160
 # use these effects to compute zm as sqrt(m)*theta (observed z score)
-thetahat <- c(.2, .3, .4)
+thetahat <- c(.25, .3, .35)
 tbl_adapted <- expand_grid(
                 zm = sqrt(m)*thetahat,
         `new mean` = seq(-0.5, 1, length.out = 50)
@@ -296,7 +296,7 @@ tbl_adapted_before <- expand_grid(
         `new mean` = seq(-0.5, 1, length.out = 50)
     ) %>%
     mutate(
-        zmbar = sqrt(mbar)*0.3,
+        zmbar = sqrt(mbar)*0.25,
           tmp = pmap(
               list(`new mean`, mbar, zmbar),
               function(mu, mbar, zmbar) future({
@@ -331,7 +331,7 @@ tbl_adapted_before <- expand_grid(
     )
 # compute properties of original design at m = 35
 tbl_original <- tibble(
-    effect = 0.3,
+    effect = 0.25,
       mbar = 35,
          n = map_dbl(effect, ~n(optimal_design, sqrt(mbar)*.)),
          c = map_dbl(effect, ~critical_value(optimal_design, sqrt(mbar)*.))

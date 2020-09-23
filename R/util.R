@@ -54,6 +54,14 @@ probability_density.TruncatedNormal <- function(Theta, theta, ...) {
     truncnorm::dtruncnorm(theta, mean = Theta$mu, sd = Theta$tau, a = Theta$a, b = Theta$b)
 }
 
+cdf <- function(Theta, theta, ...) {
+  UseMethod("cdf", Theta)
+}
+
+cdf.TruncatedNormal <- function(Theta, theta, ...) {
+  truncnorm::ptruncnorm(theta, mean = Theta$mu, sd = Theta$tau, a = Theta$a, b = Theta$b)
+}
+
 posterior <- function(prior, n, z, ...) UseMethod("posterior", prior)
 
 posterior.TruncatedNormal <- function(prior, n, z) {
