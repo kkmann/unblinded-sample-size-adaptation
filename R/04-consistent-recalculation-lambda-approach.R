@@ -1,4 +1,4 @@
-# Consistent Recalculation, lambda-approach ####################################
+# Consistent Unplanned Recalculation using the lambda-approach #################
 
 
 
@@ -140,7 +140,7 @@ adapt_lambda <- function(priormean, zm) {
             c = c_old,
             optim = NULL
         ))
-    # old conditional type-I error
+    # original conditional type-I error
     alpha_bar <- conditional_power(zm, m, n_old, c_old, 0)
     new_prior <- TruncatedNormal(priormean, 0.2, -0.5, 1.0)
     objective <- function(x) {

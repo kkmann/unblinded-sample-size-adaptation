@@ -1,4 +1,5 @@
-# Naive Recalculation Based on Predictive Power ################################
+# Naive Pre-planned Recalculation Based on Predictive Power and
+# Optimal Pre-planned Recalculation ############################################
 
 
 
@@ -38,7 +39,7 @@ cat(sprintf(
 
 # Define recalculation rule ----------------------------------------------------
 adapt_naive <- function(m, zm, beta_cond, n_min, n_max, n_old, c_old) {
-    # old conditional error
+    # original conditional error
     alpha_bar <- conditional_power(zm, m, n_old, c_old, 0)
     target <- function(x) {
         n_bar <- x[1]; c_bar <- x[2]
@@ -63,9 +64,9 @@ adapt_naive <- function(m, zm, beta_cond, n_min, n_max, n_old, c_old) {
 
 
 # Plot 'mandatory' recalculation design ----------------------------------------
-# 26, interim time-point
+# interim time-point m = 26
 m <- round(n/3)
-# define lower an upper bound for recalculation
+# define lower and upper bound for recalculation
 n_min <- 30
 n_max <- 160
 tbl_adapted <- tibble(

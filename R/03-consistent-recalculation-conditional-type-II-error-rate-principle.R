@@ -1,4 +1,4 @@
-# Consistent Recalculation on Predictive Power ################################
+# Consistent Unplanned Recalculation Based on Predictive Power #################
 
 
 
@@ -78,9 +78,9 @@ adapt <- function(priormean, zm, nstart = 15) {
             c = c_old,
             multiroot = NULL
         ))
-    # old conditional type-I error
+    # original conditional type-I error
     alpha_bar <- conditional_power(zm, m, n_old, c_old, 0)
-    # old conditional type-II error
+    # original conditional type-II error
     beta_bar <- 1 - predictive_power(zm, m, n_old, c_old, prior)
     new_prior <- TruncatedNormal(priormean, 0.2, -0.5, 1.0)
     res <- suppressWarnings(rootSolve::multiroot(
@@ -256,9 +256,9 @@ predictive_power_before_interim <- function(design, mbar, zmbar, prior) {
 }
 # define adaptation rule
 adapt_before <- function(priormean, mbar, zmbar, nstart = 10) {
-    # old conditional type-I error
+    # original conditional type-I error
     alpha_bar <- conditional_power_before_interim(optimal_design, mbar, zmbar, 0)
-    # old conditional type-II error
+    # original conditional type-II error
     beta_bar <- 1 - predictive_power_before_interim(optimal_design, mbar, zmbar, prior)
     new_prior <- TruncatedNormal(priormean, 0.2, -0.5, 1.0)
     res <- suppressWarnings(rootSolve::multiroot(
@@ -329,7 +329,7 @@ tbl_adapted_before <- expand_grid(
         effect = factor(effect),
           mbar = factor(mbar)
     )
-# compute properties of old design at m = 35
+# compute properties of original design at m = 35
 tbl_original <- tibble(
     effect = 0.3,
       mbar = 35,

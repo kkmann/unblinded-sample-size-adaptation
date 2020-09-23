@@ -1,4 +1,4 @@
-# Estimating Conditional Power #################################################
+# Estimating Conditional Power and Friends #####################################
 
 
 
