@@ -1,4 +1,6 @@
 ![run](https://github.com/kkmann/unplanned-sample-size-adaptation/workflows/run/badge.svg)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kkmann/unblinded-sample-size-adaptation/master?urlpath=rstudio)
+[![DOI](https://zenodo.org/badge/274669694.svg)](https://zenodo.org/badge/latestdoi/274669694)
 
 # Sample Size Recalculation, When and How?
 
