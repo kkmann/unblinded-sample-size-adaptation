@@ -41,50 +41,46 @@
 \bibliographystyle{WileyNJD-AMA}
 \usepackage{scalerel}
 \newcommand{\kr}[1]{{\color{red}#1}}
-
+\usepackage{comment}
 
 
 \title{Conditional Power and Friends: The Why and How of (Un)planned, Unblinded Sample Size Recalculations in Confirmatory Trials}
 
+%\begin{comment}
 \author{
-  Kevin Kunzmann \thanks{
+    Kevin Kunzmann \thanks{
         MRC Biostatistics Unit, University of Cambridge,
         Cambridge Institute of Public Health,
         Forvie Site, Robinson Way,
         Cambridge Biomedical Campus,
         Cambridge CB2 0SR,
-        United Kingdom
+        United Kingdom,
+        \texttt{kevin.kunzmann@mrc-bsu.cam.ac.uk}
     }\\
     MRC Biostatistics Unit \\
     University of Cambridge \\
-    \texttt{kevin.kunzmann@mrc-bsu.cam.ac.uk} \\
     Michael J. Grayling \\
     Population Health Sciences Institute \\
     Newcastle University \\
-    \texttt{michael.grayling@newcastle.ac.uk} \\
     Kim May Lee \\
     Pragmatic Clinical Trials Unit\\
     Queen Mary University of London\\
-    \texttt{k.m.lee@qmul.ac.uk} \\
     David S.\ Robertson \\
     MRC Biostatisics Unit\\
     University of Cambridge\\
-    \texttt{david.robertson@mrc-bsu.cam.ac.uk} \\
     Kaspar Rufibach \\
     Methods, Collaboration, and Outreach Group (MCO) \\
     Department of Biostatistics\\
     F. Hoffmann-La Roche, Basel\\
-    \texttt{kaspar.rufibach@roche.com} \\
     James M. S. Wason \\
     Population Health Sciences Institute \\
     Newcastle University\\
     and \\
      MRC Biostatistics Unit \\
-    University of Cambridge \\
-    \texttt{james.wason@newcastle.ac.uk}
+    University of Cambridge
 }
-
-
+%\end{comment}
+%\author{}
 
 
 \usepackage{setspace}
@@ -105,24 +101,16 @@
 \newpage
 
 \begin{abstract}
-Determining the sample size of a confirmatory trial is challenging.
-If the sample size is too small, the chance of detecting an effect is small.
-If it is too big, trial duration and costs are needlessly inflated.
 Adapting the final sample size of a trial to the evidence accruing
-during the trial is thus a natural way to address
-this planning uncertainty.
-In a regulatory environment,
-designs with adaptive sample size need to
+during the trial is a natural way to address planning uncertainty.
+Designs with adaptive sample size need to
 account for their optional stopping to guarantee
 strict type-I error-rate control.
 A variety of different methods to maintain type-I error-rate control
 after unplanned changes of the initial sample size have been proposed
-in the literature rendering interim analyses for
-the purpose of sample size recalculation feasible in
-practice.
-Any form of interim analysis allows the analysis of
-a trial's prospects to finally reject the null hypothesis
-given the data observed up to the interim analysis.
+in the literature.
+This makes interim analyses for the purpose of sample size 
+recalculation feasible in a regulatory context.
 Since the sample size is usually determined via an
 argument based on the power of the trial,
 an interim analysis raises the question of
@@ -411,7 +399,7 @@ of the observed interim outcome, where the interim time-point $m = 26$.
     \centering
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=.9\textwidth]{figures/acp_ocp_pp_example}
+        \includegraphics[width=.85\textwidth]{figures/acp_ocp_pp_example}
         \caption{%
             Estimates as function of the interim data.
         }
@@ -419,7 +407,7 @@ of the observed interim outcome, where the interim time-point $m = 26$.
     \end{subfigure}
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=.9\textwidth]{figures/acp_ocp_pp_sampling_distributions}
+        \includegraphics[width=.85\textwidth]{figures/acp_ocp_pp_sampling_distributions}
         \caption{%
             Histograms of the sampling distributions.
         }
@@ -427,7 +415,7 @@ of the observed interim outcome, where the interim time-point $m = 26$.
     \end{subfigure}
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=.9\textwidth]{figures/acp_ocp_pp_bias_mae_mse}
+        \includegraphics[width=.85\textwidth]{figures/acp_ocp_pp_bias_mae_mse}
         \caption{%
             Bias, mean absolute error (MAE) and mean squared error (MSE).
         }
@@ -811,7 +799,7 @@ Figure~\ref{fig:recalculation-old-m} shows the behavior of the recalculated samp
     \centering
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=.9\textwidth]{figures/recalculation-type-II-original-m}
+        \includegraphics[width=.8\textwidth]{figures/recalculation-type-II-original-m}
         \caption{%
             Interim analysis at the originally planned interim sample size of $m=35$ for varying observed effect.
         }
@@ -819,7 +807,7 @@ Figure~\ref{fig:recalculation-old-m} shows the behavior of the recalculated samp
     \end{subfigure}
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=.9\textwidth]{figures/recalculation-type-II-earlier}
+        \includegraphics[width=.8\textwidth]{figures/recalculation-type-II-earlier}
         \caption{%
             Earlier-than-planned interim analysis at an observed effect of $0.3$ and varying interim time-point.
         }
@@ -827,7 +815,7 @@ Figure~\ref{fig:recalculation-old-m} shows the behavior of the recalculated samp
     \end{subfigure}
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=.9\textwidth]{figures/recalculation-lambda-approach-original-m}
+        \includegraphics[width=.8\textwidth]{figures/recalculation-lambda-approach-original-m}
         \caption{%
             Interim analysis at the originally planned interim sample size of $m=35$ for varying observed effect and the $\lambda$ approach.
         }
