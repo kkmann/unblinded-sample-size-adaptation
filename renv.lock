@@ -60,10 +60,10 @@
     },
     "adoptr": {
       "Package": "adoptr",
-      "Version": "0.3.3.9000",
+      "Version": "0.3.2",
       "Source": "Repository",
-      "Repository": null,
-      "Hash": "e3d12f5f20b061de86a7cbf1a69e4107"
+      "Repository": "CRAN",
+      "Hash": "d79a60a1554661454b62f7fa7d6b58b5"
     },
     "askpass": {
       "Package": "askpass",
@@ -81,10 +81,10 @@
     },
     "backports": {
       "Package": "backports",
-      "Version": "1.1.8",
+      "Version": "1.1.10",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "3ef0eac19317fd03c0c854aed581d473"
+      "Hash": "05ffd2d4acb51aee70f1de68ad7a6aed"
     },
     "base64enc": {
       "Package": "base64enc",
@@ -242,10 +242,10 @@
     },
     "future": {
       "Package": "future",
-      "Version": "1.17.0",
+      "Version": "1.19.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "71c119f236429d7b19fd29229b013cba"
+      "Hash": "224cbc34a2c97606b0e6311e3bd19e05"
     },
     "generics": {
       "Package": "generics",
@@ -263,10 +263,10 @@
     },
     "globals": {
       "Package": "globals",
-      "Version": "0.12.5",
+      "Version": "0.13.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "e9e529fb7a579ad4b4ff65e052e76ed8"
+      "Hash": "3eb799a11cf9d28314691e44a2eaaa14"
     },
     "glue": {
       "Package": "glue",
