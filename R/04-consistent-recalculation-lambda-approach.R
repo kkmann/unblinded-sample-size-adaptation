@@ -67,67 +67,6 @@ optimal_design <- minimize(
 )$design
 
 
-
-# Determine 'Lagrange-multiplier' lambda ---------------------------------
-# function to determine optimal design given lambda
-f <- function(lambda) {
-    minimize(
-        composite({ESS - lambda*EP}),
-        subject_to(
-            TOER <= alpha
-        ),
-        get_initial_design(
-            theta = theta1,
-            alpha = alpha,
-            beta  = beta,
-            type  = 'two-stage',
-            dist  = Normal(two_armed = FALSE),
-            order = 5L # reduced precision, we only neeed to get a good proxy for the power to match, faster!
-        ),
-        opts = list(algorithm = "NLOPT_LN_COBYLA", xtol_rel = 1e-05, maxeval = 5e4)
-    )$design
-}
-# evaluate on grid (smoothness unknown!) to pick lambda that gives
-# target power of 1 - beta
-tbl_lambda <- tibble(
-        lambda = seq(200, 300, by = 5),
-        design = map(lambda, ~future({f(.)})) # spawn futures
-    ) %>%
-    mutate(
-        design = map(design, value), # collect futures
-         delta = map_dbl(design, ~abs(evaluate(EP, .) - (1 - beta)))
-    )
-# diagnostic plot, not saved
-tbl_lambda %>%
-    ggplot() +
-    aes(lambda, delta) +
-    geom_line() +
-    geom_point() +
-    ylab("power difference")
-cat("original optimal design:\n\r")
-summary(
-        optimal_design,
-        `E[N]` = ESS,
-        `SD[N]` = SDSS,
-        `MTOER` = TOER,
-        `Expected Power` = EP
-    ) %>%
-    show()
-# determine optimal lambda
-lambda <- tbl_lambda%>% arrange(delta) %>% pull(lambda) %>% head(1)
-cat(sprintf("matched-lambda optimal design, lambda=%.2f:\n\r", lambda))
-tbl_lambda %>%
-    arrange(delta) %>%
-    pull(design) %>%
-    .[[1]] %>%
-    summary(
-         `E[N]` = ESS,
-        `SD[N]` = SDSS,
-        `MTOER` = TOER,
-        `Expected Power` = EP
-    ) %>%
-    show()
-
 # Plot adaptations under lambda rule -------------------------------------------
     m <- 35
 n_max <- 160
@@ -165,7 +104,7 @@ adapt_lambda <- function(priormean, zm) {
     # objective uses lagrange multiplier from original problem
     objective <- function(x) {
         n_bar <- x[1]; c_bar <- x[2]
-        n_bar - tmp2[1]*predictive_power(zm, m = m, n = n_bar, c = c_bar, prior = new_prior)
+        n_bar - lambda[1]*predictive_power(zm, m = m, n = n_bar, c = c_bar, prior = new_prior)
     }
     conditional_error_constraint <- function(x) {
         n_bar <- x[1]; c_bar <- x[2]
