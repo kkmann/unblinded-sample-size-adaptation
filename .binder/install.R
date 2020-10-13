@@ -1,5 +1,5 @@
-install.packages("devtools")
 install.packages("tidyverse")
+install.packages("tinytex")
 install.packages("patchwork")
 install.packages("truncnorm")
 install.packages("adoptr")
