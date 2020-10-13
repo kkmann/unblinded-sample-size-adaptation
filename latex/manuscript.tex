@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[12pt]{article}
 
 \usepackage[utf8]{inputenc} % allow utf-8 input
 \usepackage[T1]{fontenc}    % use 8-bit T1 fonts
@@ -37,7 +37,8 @@
 
 % other
 \usepackage{color}
-\usepackage{natbib}
+\usepackage[numbers,super,sort&compress]{NJDnatbib}
+\bibliographystyle{WileyNJD-AMA}
 \usepackage{scalerel}
 \newcommand{\kr}[1]{{\color{red}#1}}
 
@@ -167,7 +168,7 @@ Mainly, two ways of addressing this challenge have been put forward in the liter
 
 Firstly, the so-called `hybrid' approach to sample size
 derivation takes a Bayesian
-view on determining the initial sample size of a clinical trial~\citep{spiegelhalter1994}.
+view on determining the initial sample size of a clinical trial~\cite{spiegelhalter1994}.
 The Bayesian component requires the specification of an informative
 prior on the parameters of interest.
 This then allows reasoning about the `expected power' of a trial as a
@@ -181,23 +182,23 @@ Since the actual analysis is still frequentist, type-I error rate control is not
 
 Secondly, authors have proposed to apply the concept of adaptive design changes
 to recalculate the initial sample size of a design based on data observed
-within the trial itself, see e.g.~\citet{bauer2016}.
+within the trial itself~\cite{bauer2016}.
 The rationale behind this approach is to use the accruing evidence about the unknown parameters driving the sample size derivation to
 `correct' the sample size mid-trial.
 During the interim analysis, the accrued data can either be unblinded
 or not.
-Methods for the latter `blinded interim analysis' are particularly useful if relevant nuisance parameters such as the variance are also unknown \citep{birkett1994internal,bauer2016}.
+Methods for the latter `blinded interim analysis' are particularly useful if relevant nuisance parameters such as the variance are also unknown \cite{birkett1994internal,bauer2016}.
 We focus on the unblinded case which allows for a more precise
 interim assessment of the effect size than methods that retain
 the blind.
 The maximal type-I error rate constraint is then usually protected by
-applying the conditional error principle~\citep{muller2004,brannath2012}
+applying the conditional error principle~\cite{muller2004,brannath2012}
 or an equivalent formulation via $\alpha$-spending or
-combination functions~\citep{bauer2016}.
+combination functions~\cite{bauer2016}.
 Often the sample size of the current
 trial is adjusted such that the conditional power given the data observed up to the
 interim analysis again exceeds the initial threshold for unconditional
-power~\citep{proschan1995}.
+power~\cite{proschan1995}.
 Any recalculation based on conditional power arguments must
 address the problem that conditional power,
 just as unconditional power,
@@ -217,14 +218,14 @@ data since the effect size is kept fixed.
 Secondly,
 authors have proposed to use the `observed conditional power' instead, which replaces the unknown parameters with their maximum-likelihood estimates.
 The latter `plug-in' approach is often criticized for
-`... [using] the interim estimate of the effect [...] twice ...' \citep[p.~330]{bauer2016} (see also~\cite{bauer2006}).
+`... [using] the interim estimate of the effect [...] twice ...' Bauer~\textit{et~al.},~p.~330~\cite{bauer2016} and \cite{bauer2006}.
 Thirdly,
 conditional power can be evaluated as Bayesian expected power conditional on the observed interim data,
 i.e., by averaging conditional power as function of the unknown
 parameters with respect to the posterior density
 after conducting the interim analysis.
 Within the hybrid Bayesian framework this is usually referred to as
-`predictive power'~\citep{spiegelhalter1994,bauer2016}.
+`predictive power'~\cite{spiegelhalter1994,bauer2016}.
 
 The purpose of this paper is to argue that pre-planned sample size adaptations
 using methodology intended for unplanned interim analyses to react to within-trial interim data are inefficient and unnecessary if the original design was planned optimally.
@@ -283,7 +284,7 @@ The required size of the trial $n$, given a maximal allowable type-I error
 rate, is usually determined by some form of restriction on
 the (minimal) statistical power of the test.
 Approaches to defining such a power constraint under
-different assumptions were reviewed in~\citet{kunzmann2020}.
+different assumptions were reviewed in~\cite{kunzmann2020}.
 
 
 
@@ -301,7 +302,7 @@ This effectively constitutes an estimation problem where the estimand is
 the \emph{conditional} probability of rejecting the null hypothesis given
 $Z_m=z_m$ and $\theta > 0$.
 Here the conditioning on a positive effect is crucial to justify the notion
-of `power' in contrast to the unconditional `probability of success'~\citep{kunzmann2020}.
+of `power' in contrast to the unconditional `probability of success'~\cite{kunzmann2020}.
 
 Since $Z_n$ and $Z_m$ are (asymptotically) jointly normal, the conditional distribution of $Z_n$ given $Z_m$ and $\theta$ is again normal and
 given by
@@ -335,8 +336,7 @@ Yet, as a function of the unknown quantity $\theta$,
 $\CP(z_m, c, \theta)$ can be estimated from observed data.
 The estimation perspective on `evaluating' conditional power is
 less commonly taken in the literature but provides a consistent framework to
-compare the characteristics of different methods
-(see also~\citep[Discussion]{bauer2006}).
+compare the characteristics of different methods~\cite{bauer2006}.
 
 Firstly, conditional power can be estimated based on a fixed point alternative~$\theta_1$.
 In a slight abuse of terminology,
@@ -348,8 +348,7 @@ it `assumed conditional power'
 \end{align}
 
 Secondly, the observed effect $\widehat{\theta}_m$ can be used
-as a plug-in estimator for the unknown effect size
-(see, e.g.~\citep{proschan1995}).
+as a plug-in estimator for the unknown effect size~\cite{proschan1995}.
 This quantity is sometimes referred to as `observed conditional power'
 in the literature and is defined as
 \begin{align}
@@ -365,7 +364,7 @@ Our definition of this so-called `predictive power'
     \PP_\varphi(z_m,c) :&= \Pr_\varphi[\,Z_n > c \cond \Theta >0, Z_m = z_m\,] \\
     &= \int_{0}^{\infty}\CP\big(z_m, c, \theta\big)\,\varphi\big(\theta\cond Z_m=z_m, \Theta\geq0\big)\operatorname{d}\theta
 \end{align}
-differs slightly from the one proposed by~\citet{spiegelhalter1994}
+differs slightly from the one proposed by~\cite{spiegelhalter1994}
 in that we condition on a positive effect size $\Theta>0$.
 This is more consistent with the notion of frequentist power as discussed in~\cite{kunzmann2020}, although the difference is
 only of practical relevance when a substantial
@@ -392,7 +391,7 @@ computation of the posterior distribution under a normal likelihood.
 It is also the maximum entropy distribution on a compact interval given mean and standard deviation and thus `least informative'
 given a lower and upper boundaries on plausible effects as well as
 the location and vagueness (variance) of the prior.
-Following~\citep{kunzmann2020} the required
+Following~\cite{kunzmann2020} the required
 sample size $n$ is then determined by requiring
 a minimal expected power of $1-\beta=80\%$,
 where expected power is defined as
@@ -465,7 +464,7 @@ three estimators under different assumptions
 about the value of $\theta$ (see~Figure~\ref{fig:sampling-distributions}).
 Since $\OCP$ does not condition on $\Theta>0$, the sampling distribution is much more left-skewed for small effects than for the other two estimators.
 Also, the negligence of the sampling variation of $\widehat{\theta}_m$, which $\OCP$ plugs in the expression for conditional power, leads to a larger variance for intermediate values of $\theta$ and the characteristic
-U-shape \citep{bauer2006}.
+U-shape \cite{bauer2006}.
 This high variance of $\OCP$ directly translates to a relatively large mean absolute error (MAE) and mean squared error (MSE) when estimating conditional power,
 see Figure~\ref{fig:acp-ocp-pp-as-estimators}.
 $\PP$ is the posterior expectation of conditional power with respect to the chosen prior and thus  minimizes the quadratic Bayes risk, i.e.~the MSE.
@@ -491,7 +490,7 @@ Depending on the prior chose, it's properties can be either more similar to $\AC
 \label{sec:naive-adaptations}
 
 Monitoring the predictive power of an ongoing trial naturally raises the question of whether this information can be leveraged to improve the operating characteristics of a trial.
-Typically, sample size recalculation is considered in the context of group-sequential designs at the pre-specified interim analysis \citep{proschan1995,brannath2004,bauer2016}.
+Typically, sample size recalculation is considered in the context of group-sequential designs at the pre-specified interim analysis \cite{proschan1995,brannath2004,bauer2016}.
 From a statistical perspective,
 there is no reason why a sample size recalculation should not be
 performed for a study that initially was planned using a single-stage design.
@@ -502,11 +501,11 @@ All results can be generalized to the case of more complex starting designs and 
 
 A method for sample size recalculation that is often discussed in the literature is to derive a new sample size $n'$ and a new critical value $c'$ such that some estimate of conditional power exceeds a threshold $1-\beta_{cond.}$.
 Different choices for the estimator of conditional power
-and the choice of $\beta_{cond.}$ have been discussed in the literature \citep{proschan1995,brannath2004,bauer2016}.
-Strict overall type-I error rate control can be maintained by invoking the conditional error principle \citep{muller2001,muller2004,brannath2012}, i.e., by limiting the maximal type-I error rate of the new design to the maximal conditional type-I error rate of the original design given the observed $z_m$.
+and the choice of $\beta_{cond.}$ have been discussed in the literature \cite{proschan1995,brannath2004,bauer2016}.
+Strict overall type-I error rate control can be maintained by invoking the conditional error principle \cite{muller2001,muller2004,brannath2012}, i.e., by limiting the maximal type-I error rate of the new design to the maximal conditional type-I error rate of the original design given the observed $z_m$.
 Often, trial protocols leave the exact choice of $1-\beta_{cond.}$ open since it can be chosen \textit{ad~hoc}
 without compromising strict type-I-error rate control.
-The basic concept of readjusting the sample size to achieve the desired conditional power is, however, a common approach, see for instance,~\citet{bhatt2013} and~\citet{mehta2009}.
+The basic concept of readjusting the sample size to achieve the desired conditional power is, however, a common approach, see for instance,~\cite{bhatt2013} and~\cite{mehta2009}.
 
 In accordance with the discussion in the previous section
 and to be consistent with the derivation of the
@@ -601,7 +600,7 @@ for futility and efficacy.
 
 Similar to suggestions in the literature on binding futility stopping,
 one could modify the initial nominal $\alpha$ and the conditional power threshold $\beta_{cond.}$ until the recalculated design again fulfills the required
-operating characteristics \citep{brannath2004}.
+operating characteristics \cite{brannath2004}.
 This approach to define a fully pre-specified two-stage design is, however, unnecessarily complicated in that it
 uses methods like the conditional error principle or a combination function, which are originally intended for \emph{unplanned}
 design adaptations.
@@ -625,12 +624,12 @@ the critical value function $c(z_m)$,
 and the early futility- and efficacy boundaries
 ($n(z_m)=m$ and $ c(z_m)=\pm\infty$)
 can be optimized directly.
-For the sample size function $n(z_m)$ \citet{brannath2004} discussed this approach by fitting a polynomial of degree 4 but they did not optimize
+For the sample size function $n(z_m)$ \cite{brannath2004} discussed this approach by fitting a polynomial of degree 4 but they did not optimize
 any of the other parameters.
-In a more general form, \citet{pilz2019} approached the problem using
+In a more general form, \cite{pilz2019} approached the problem using
 variational methods.
 An \texttt{R} implementation that uses cubic splines for both the $n$ and
-$c$ functions is available via the package~\textit{adoptr}~\citep{adoptrjss2020}.
+$c$ functions is available via the package~\textit{adoptr}~\cite{adoptrjss2020}.
 
 In the following we restrict the considerations to the case
 where only expected sample size is of interest and the variation is
@@ -642,7 +641,7 @@ The corresponding optimal two-stage design is the solution of
     \st &&                 \Pr_{0}[\,Z_{n(Z_m)} > c(Z_m)\,] & \leq \alpha \\
         &&     \EP_\varphi\big(n(\cdot), c(\cdot)\big) & \geq 1 - \beta \label{eq:optimal-design-end}
 \end{align}
-and can be derived numerically using the \texttt{R} package \texttt{adoptr}~\citep{adoptrjss2020}.
+and can be derived numerically using the \texttt{R} package \texttt{adoptr}~\cite{adoptrjss2020}.
 Here, $\E_\varphi[\,n(Z_m)\,]$ is the expected sample size under the prior $\varphi$ and expected power needs to be redefined to account for the
 fact that $n$ and $c$ are now functions of the interim results
 \begin{align}
@@ -788,9 +787,9 @@ This effectively relaxes the predictive power constraint by allowing the same tr
 between sample size and predictive power that was implied by the original optimal design.
 The conditional type-I error rate constraint is not relaxed to comply with the
 conditional error principle.
-This approach is closely related to the formulation of the optimal-design problem given in~\citet{jennison2015} and the utility perspective on sample
-size derivation presented in~\citep{kunzmann2020}.
-In contrast to the situation analyzed by \citet{jennison2015}, however,
+This approach is closely related to the formulation of the optimal-design problem given in~\cite{jennison2015} and the utility perspective on sample
+size derivation presented in~\cite{kunzmann2020}.
+In contrast to the situation analyzed by \cite{jennison2015}, however,
 $\lambda_h$ does depend on $z_m$.
 This is due to the fact that expected sample size is formed with respect to the unconditional
 prior while expected power uses the prior conditional on $\Theta>0$.
@@ -875,7 +874,7 @@ if the predictive power is considered too low to warrant a continuation.
 Monitoring the power of the remainder of an ongoing trial constitutes an estimation problem since the conditional power
 is a function of the unknown treatment effect.
 An often overlooked aspect of this estimation problem is that it is
-conditional on a positive treatment effect since the notion of power is conditional on there being an non-null effect~\citep{kunzmann2020}.
+conditional on a positive treatment effect since the notion of power is conditional on there being an non-null effect~\cite{kunzmann2020}.
 In many practical situations where the prior mass is concentrated on
 non-null effects the effect of conditioning is negligible but its importance increases with the vagueness of a the prior.
 This lack of conditioning on a positive treatment effect is one of the reasons observed conditional power performs rather poorly as an estimator of the unknown conditional power.
@@ -887,7 +886,7 @@ In situations where the effect size is fairy well known, a point prior might con
 In any other case, the Bayesian predictive power allows \textit{a~priori} information to be incorporated in a more fine-grained way and
 guarantees optimal mean-squared-error performance.
 If an unconditional measure for the probability to reject the null hypothesis is sought,
-a conditional version of the probability of success (or assurance) can be derived in an analogue way~\citep{kunzmann2020}.
+a conditional version of the probability of success (or assurance) can be derived in an analogue way~\cite{kunzmann2020}.
 
 Great care should be taken when predictive power
 or another estimator of conditional power
@@ -944,7 +943,7 @@ Also,
 optimal-two stage designs require optimizing over function-spaces to find the optimal sample size and critical value functions.
 Obtaining a stable solution might thus be hard in practice and
 group-sequential designs are a viable approximation since optimizing the stage-wise sample sizes and stopping boundaries only requires optimizing over a small set of real parameters.
-It is well-known, that optimal group-sequential designs approximate the performance of optimal two-stage designs with variable sample sizes sufficiently well~\citep{wassmer2016}.
+It is well-known, that optimal group-sequential designs approximate the performance of optimal two-stage designs with variable sample sizes sufficiently well~\cite{wassmer2016}.
 Still, the same principle considerations apply:
 An optimal (group-sequential) design only needs to be revised if either the objective function or the underlying planning assumptions, i.e., the prior on the effect size, changes.
 
@@ -962,16 +961,15 @@ will be similar to the optimal design due to the choice of $\lambda_h$.
 A limitation of the proposed recalculation methods is the fact that they
 rely on the conditional error principle for strict type-I-error rate control.
 The conditional error principle can be difficult to extend to cases with nuisance
-parameters \citep{gutjahr2011}.
+parameters \cite{gutjahr2011}.
 In practice, a simple plug-in approach similar to the approach in blinded sample size reassessment might be viable but have not yet been investigated more thoroughly.
 Alternatively, any other form of pre-specifying a combination function for the stage-wise p values might be used to control the type-I-error rate.
 This combination function should then also be optimized over during the planning stage
 to avoid inconsistencies.
-In particular, the optimal combination function of a two stage-design minimizing expected sample size can be approximated with an inverse normal combination test~\citep{pilz2019}.
+In particular, the optimal combination function of a two stage-design minimizing expected sample size can be approximated with an inverse normal combination test~\cite{pilz2019}.
 
 
 
-\bibliographystyle{plainnat}
 \bibliography{manuscript.bib}
 
 
