@@ -1,4 +1,5 @@
 ![run](https://github.com/kkmann/unplanned-sample-size-adaptation/workflows/run/badge.svg)
+[![DOI](https://zenodo.org/badge/274669694.svg)](https://zenodo.org/badge/latestdoi/274669694)
 
 # Sample Size Recalculation, When and How?
 
