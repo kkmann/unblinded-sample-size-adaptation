@@ -2,3 +2,4 @@ channels:
   - conda-forge
 dependencies:
   - r-base=4.0.3
+  - tidyverse=1.2.1
