@@ -4,18 +4,17 @@
 
 
 # Setup ------------------------------------------------------------------------
-suppressPackageStartupMessages({
-    library(tidyverse)
-    library(patchwork)
-    library(future)
-    library(adoptr)
-})
+options(tidyverse.quiet = TRUE)
+library(tidyverse)
+library(patchwork)
+library(future)
+library(adoptr)
 
 plan(multisession)
 
 set.seed(42)
-source("util.R")
-dir.create("../output/figures", recursive = TRUE, showWarnings = FALSE)
+source("R/util.R")
+dir.create("output/figures", recursive = TRUE, showWarnings = FALSE)
 
 
 
@@ -285,7 +284,7 @@ plt3 <- ggplot(tbl_designs) +
     )
 # compose plot
 plt1 + plt2 + plt3 + plot_layout(guides = "collect") & theme(legend.position = 'top')
-ggsave("../output/figures/naive_adaptive_and_optimal_designs.pdf", width = 8, height = 3.5)
+ggsave("output/figures/naive_adaptive_and_optimal_designs.pdf", width = 8, height = 3.5)
 
 
 

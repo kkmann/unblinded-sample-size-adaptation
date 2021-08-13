@@ -3,14 +3,14 @@
 
 
 # Setup ------------------------------------------------------------------------
-suppressPackageStartupMessages({
-    library(tidyverse)
-    library(patchwork)
-})
+options(tidyverse.quiet = TRUE)
+library(tidyverse)
+library(patchwork)
 
 set.seed(42)
-source("util.R")
-dir.create("../output/figures", recursive = TRUE, showWarnings = FALSE)
+
+source("R/util.R")
+dir.create("output/figures", recursive = TRUE, showWarnings = FALSE)
 
 
 
@@ -40,7 +40,7 @@ tibble(
           legend.position = 'top',
           panel.grid.minor = element_blank()
       )
-ggsave("../output/figures/prior_density.pdf", width = 8, height = 3.5)
+ggsave("output/figures/prior_density.pdf", width = 8, height = 3.5)
 
 
 
@@ -74,13 +74,14 @@ tibble(
         aes(z, value, linetype = quantity) +
         geom_line() +
         labs(x = expression(z[m]), y = '') +
-        scale_y_continuous('', breaks = seq(0, 1, by = 0.2)) +
+        scale_y_continuous("conditional power estimate", breaks = seq(0, 1, by = 0.2)) +
         scale_linetype('') +
+    #ylim(c(0, .5)) +
         theme_bw() +
         theme(
             legend.position = 'top'
         )
-ggsave("../output/figures/acp_ocp_pp_example.pdf", width = 8, height = 3.5)
+ggsave("output/figures/acp_ocp_pp_example.pdf", width = 8, height = 3.5)
 
 
 
@@ -107,7 +108,6 @@ expand_grid(
     pivot_longer(c(bias, MAE, MSE), names_to = "quantity") %>%
     ggplot() +
         aes(theta, value, linetype = name) +
-        geom_hline(yintercept = 0) +
         geom_line() +
         facet_wrap(~quantity) +
         labs(x = expression(theta), y = '', color = '') +
@@ -117,7 +117,7 @@ expand_grid(
              legend.position = 'top',
             panel.grid.minor = element_blank()
         )
-ggsave("../output/figures/acp_ocp_pp_bias_mae_mse.pdf", width = 8, height = 3.5)
+ggsave("output/figures/acp_ocp_pp_bias_mae_mse.pdf", width = 8, height = 3.5)
 
 
 
@@ -130,7 +130,8 @@ expand_grid(
            zm = zm + sqrt(m)*theta,
           ACP =  map_dbl(zm, ~conditional_power(., m, n, crit, theta1)),
           OCP =  map_dbl(zm, ~observed_conditional_power(., m, n, crit)),
-           PP =  map_dbl(zm, ~predictive_power(., m, n, crit, prior))
+           PP =  map_dbl(zm, ~predictive_power(., m, n, crit, prior)),
+          PP2 =  map_dbl(zm, ~predictive_power(., m, n, crit, prior))
     ) %>%
     pivot_longer(c(ACP, OCP, PP)) %>%
     ggplot() +
@@ -138,8 +139,10 @@ expand_grid(
         geom_histogram(bins = 25, position = 'identity') +
         facet_grid(name ~ theta, scales = 'free_y') +
         theme_bw() +
-        labs(x = "") +
+        labs(x = "conditional power estimate") +
         theme(
-            panel.grid.minor = element_blank()
-        )
-ggsave("../output/figures/acp_ocp_pp_sampling_distributions.pdf", width = 8, height = 3.5)
+            panel.grid.minor = element_blank(),
+            plot.subtitle = element_text(hjust = 0.5)
+        ) +
+        labs(subtitle = expression(theta))
+ggsave("output/figures/acp_ocp_pp_sampling_distributions.pdf", width = 8, height = 3.5)
