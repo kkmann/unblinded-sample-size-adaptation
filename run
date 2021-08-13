@@ -15,4 +15,4 @@ done
 
 cp -r output/figures/. latex/figures/
 
-Rscript -e "setwd('latex'); tinytex::install_tinytex(); tinytex::pdflatex('manuscript.tex', pdf_file = '../output/manuscript.pdf')"
+Rscript -e "setwd('latex'); tinytex::pdflatex('manuscript.tex', pdf_file = '../output/manuscript.pdf')"
