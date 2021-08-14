@@ -8,7 +8,7 @@ jobs:
   run-all:
     runs-on: ubuntu-latest
     steps:
-    - name: checkout repository 
+    - name: checkout repository
       uses: actions/checkout@v2
     - name: setup R
       uses: r-lib/actions/setup-r@master
@@ -21,6 +21,7 @@ jobs:
     - name: install packages
       run: |
         sudo apt-get install libcurl4-openssl-dev
-        R -e 'install.packages("renv")'
+        echo "source('renv/activate.R')" > .Rprofile
         R -e 'renv::restore()'
+        echo "# source('renv/activate.R')" > .Rprofile
     - run: ./run
