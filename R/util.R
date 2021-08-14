@@ -66,7 +66,7 @@ posterior <- function(prior, n, z, ...) UseMethod("posterior", prior)
 
 posterior.TruncatedNormal <- function(prior, n, z) {
      mu_post <- 1 / (1/prior$tau^2 + n) * (prior$mu / prior$tau^2 + sqrt(n) * z)
-    tau_post <- 1 / (1/prior$tau^2 + n)
+    tau_post <- sqrt(1 / (1/prior$tau^2 + n))
     res <- list(mu = mu_post, tau = tau_post, a = prior$a, b = prior$b)
     attr(res, "class") <- c("TruncatedNormal", class(res))
     res
@@ -137,6 +137,13 @@ observed_conditional_power <- function(zm, m, n, c) conditional_power(zm, m, n, 
 
 predictive_power <- function(zm, m, n, c, prior) {
     Theta <- posterior(condition(prior, 0), n = m, z = zm)
+    f <- function(theta) conditional_power(zm, m, n, c, theta) * probability_density(Theta, theta)
+    integrate_gl(f, Theta$a, Theta$b)
+}
+
+# same, but not conditional on Theta > 0
+predictive_power2 <- function(zm, m, n, c, prior) {
+    Theta <- posterior(prior, n = m, z = zm)
     f <- function(theta) conditional_power(zm, m, n, c, theta) * probability_density(Theta, theta)
     integrate_gl(f, Theta$a, Theta$b)
 }
