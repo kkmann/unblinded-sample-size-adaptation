@@ -2,7 +2,4 @@
 
 set -ex
 
-Rscript -e "renv::restore()"
-
 Rscript -e "tinytex::install_tinytex()"
-

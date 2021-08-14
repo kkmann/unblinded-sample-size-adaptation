@@ -2,6 +2,10 @@
 
 set -ex
 
+echo "source('renv/activate.R')" > .Rprofile
+
+Rscript -e "renv::restore()"
+
 scripts=( \
     "01-conditional-power-and-friends.R" \
     "02-naive-recalculation-and-optimal-design.R" \
@@ -15,4 +19,7 @@ done
 
 cp -r output/figures/. latex/figures/
 
+Rscript -e "tinytex::install_tinytex()"
 Rscript -e "setwd('latex'); tinytex::pdflatex('manuscript.tex', pdf_file = '../output/manuscript.pdf')"
+
+echo "# source('renv/activate.R')" > .Rprofile
